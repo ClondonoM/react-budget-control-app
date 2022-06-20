@@ -1,6 +1,18 @@
+import { useState } from 'react';
+import Message from './Message';
+
 const NewBudget = ({ budget, setBudget }) => {
+  const [message, setMessage] = useState('');
+  const haldleBudget = (e) => {
+    e.preventDefault();
+    if (!Number(budget) || Number(budget) < 0) {
+      setMessage('Please enter a valid number');
+      return;
+    }
+  };
+
   return (
-    <div className='budget-container container shade'>
+    <div onSubmit={haldleBudget} className='budget-container container shade'>
       <form className='form'>
         <div className='field'>
           <label htmlFor=''>Define the Budget</label>
@@ -13,6 +25,7 @@ const NewBudget = ({ budget, setBudget }) => {
           />
         </div>
         <input type='submit' value='Add' />
+        {message && <Message type='error'>{message}</Message>}
       </form>
     </div>
   );
