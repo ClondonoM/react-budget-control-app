@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Message from './Message';
 
-const NewBudget = ({ budget, setBudget }) => {
+const NewBudget = ({ budget, setBudget, setValidBudget }) => {
   const [message, setMessage] = useState('');
   const haldleBudget = (e) => {
     e.preventDefault();
@@ -9,6 +9,8 @@ const NewBudget = ({ budget, setBudget }) => {
       setMessage('Please enter a valid number');
       return;
     }
+    setMessage('');
+    setValidBudget(true);
   };
 
   return (
@@ -18,10 +20,10 @@ const NewBudget = ({ budget, setBudget }) => {
           <label htmlFor=''>Define the Budget</label>
           <input
             className='new-budget'
-            type='text'
+            type='number'
             placeholder='Add your Budget'
             value={budget}
-            onChange={(e) => setBudget(e.target.value)}
+            onChange={(e) => setBudget(Number(e.target.value))}
           />
         </div>
         <input type='submit' value='Add' />
