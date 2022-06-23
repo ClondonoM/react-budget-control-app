@@ -4,12 +4,15 @@ import Modal from './components/Modal';
 import newspendIcon from './img/new-spend.svg';
 
 function App() {
-  const [budget, setBudget] = useState(0);
+  const [budget, setBudget] = useState('');
   const [validBudget, setValidBudget] = useState(false);
   const [modal, setModal] = useState(false);
+  const [animateModal, setAnimateModal] = useState(false);
   const handleNewspend = () => {
     setModal(true);
-    setTimeout(() => {}, timeout);
+    setTimeout(() => {
+      setAnimateModal(true);
+    }, 500);
   };
   return (
     <div>
@@ -25,7 +28,13 @@ function App() {
         </div>
       )}
 
-      {modal && <Modal setModal={setModal} />}
+      {modal && (
+        <Modal
+          setModal={setModal}
+          animateModal={animateModal}
+          setAnimateModal={setAnimateModal}
+        />
+      )}
     </div>
   );
 }
