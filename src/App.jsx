@@ -30,7 +30,7 @@ function App() {
   };
 
   return (
-    <div>
+    <div className={modal ? 'pinUp' : ''}>
       <Header
         budget={budget}
         setBudget={setBudget}
