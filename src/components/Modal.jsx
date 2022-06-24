@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Message from './Message';
 import close from '../img/close.svg';
-const Modal = ({ setModal, animateModal, setAnimateModal }) => {
+const Modal = ({ setModal, animateModal, setAnimateModal, saveSpend }) => {
   const [modalMessage, setModalMessage] = useState('');
   const [name, setName] = useState('');
   const [amount, setAmount] = useState('');
@@ -21,6 +21,7 @@ const Modal = ({ setModal, animateModal, setAnimateModal }) => {
     } else {
       setModalMessage('');
     }
+    saveSpend({ name, amount, category });
   };
   return (
     <div className='modal'>
