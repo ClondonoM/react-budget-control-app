@@ -1,3 +1,11 @@
+import {
+  LeadingActions,
+  SwipeableList,
+  SwipeableListItem,
+  SwipeAction,
+  TrailingActions,
+} from 'react-swipeable-list';
+import 'react-swipeable-list/dist/styles.css';
 import { dateFormat } from '../helpers';
 import foodIcon from '../img/food.svg';
 import healthIcon from '../img/health.svg';
@@ -18,18 +26,37 @@ const iconsDirectory = {
 };
 const Spend = ({ spend }) => {
   const { name, amount, category, date } = spend;
+  const leadingActions = () => (
+    <LeadingActions>
+      <SwipeAction onClick={() => console.log('Edit...')}>Edit</SwipeAction>
+    </LeadingActions>
+  );
+
+  const trailingActions = () => (
+    <TrailingActions>
+      <SwipeAction nClick={() => console.log('Delete...')}>Delete</SwipeAction>
+    </TrailingActions>
+  );
+
   return (
-    <div className='spend shade'>
-      <div className='spend-content'>
-        <img src={iconsDirectory[category]} alt='spend icon' />
-        <div className='spend-description'>
-          <p className='category'>{category}</p>
-          <p className='spend-name'>{name}</p>
-          <p className='spend-date'>{dateFormat(date)}</p>
+    <SwipeableList>
+      <SwipeableListItem
+        leadingActions={leadingActions()}
+        trailingActions={trailingActions()}
+      >
+        <div className='spend shade'>
+          <div className='spend-content'>
+            <img src={iconsDirectory[category]} alt='spend icon' />
+            <div className='spend-description'>
+              <p className='category'>{category}</p>
+              <p className='spend-name'>{name}</p>
+              <p className='spend-date'>{dateFormat(date)}</p>
+            </div>
+          </div>
+          <p className='spend-amount'>${amount}</p>
         </div>
-      </div>
-      <p className='spend-amount'>${amount}</p>
-    </div>
+      </SwipeableListItem>
+    </SwipeableList>
   );
 };
 
