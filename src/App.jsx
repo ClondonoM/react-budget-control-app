@@ -6,11 +6,11 @@ import { idGenerator } from './helpers';
 import newspendIcon from './img/new-spend.svg';
 
 function App() {
+  const [spends, setSpends] = useState([]);
   const [budget, setBudget] = useState('');
   const [validBudget, setValidBudget] = useState(false);
   const [modal, setModal] = useState(false);
   const [animateModal, setAnimateModal] = useState(false);
-  const [spends, setSpends] = useState([]);
   const handleNewspend = () => {
     setModal(true);
     setTimeout(() => {
@@ -32,6 +32,7 @@ function App() {
   return (
     <div className={modal ? 'pinUp' : ''}>
       <Header
+        spends={spends}
         budget={budget}
         setBudget={setBudget}
         validBudget={validBudget}

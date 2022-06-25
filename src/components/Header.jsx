@@ -1,7 +1,7 @@
 import NewBudget from './NewBudget';
 import BudgetControl from './BudgetControl';
 
-const Header = ({ budget, setBudget, validBudget, setValidBudget }) => {
+const Header = ({ spends, budget, setBudget, validBudget, setValidBudget }) => {
   return (
     <header>
       <h1>Budget Control</h1>
@@ -18,7 +18,7 @@ const Header = ({ budget, setBudget, validBudget, setValidBudget }) => {
       </div>
 
       {validBudget ? (
-        <BudgetControl budget={budget} />
+        <BudgetControl spends={spends} budget={budget} />
       ) : (
         <NewBudget
           budget={budget}
