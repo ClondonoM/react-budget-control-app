@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Header from './components/Header';
 import SpendList from './components/SpendList';
 import Modal from './components/Modal';
@@ -11,17 +11,36 @@ function App() {
   const [validBudget, setValidBudget] = useState(false);
   const [modal, setModal] = useState(false);
   const [animateModal, setAnimateModal] = useState(false);
-  const handleNewspend = () => {
+  const [editSpend, setEditSpend] = useState({});
+  useEffect(() => {
+    if (Object.keys(editSpend).length > 0) {
+      setModal(true);
+
+      setTimeout(() => {
+        setAnimateModal(true);
+      }, 500);
+    }
+  }, [editSpend]);
+
+  const handleNewSpend = () => {
     setModal(true);
+    setEditSpend({});
     setTimeout(() => {
       setAnimateModal(true);
     }, 500);
   };
 
   const saveSpend = (spend) => {
-    spend.id = idGenerator();
-    spend.date = Date.now();
-    setSpends([...spends, spend]);
+    if (spend.id) {
+      const updatedSpend = spends.map((spendState) =>
+        spendState.id === spend.id ? spend : spendState
+      );
+      setSpends(updatedSpend);
+    } else {
+      spend.id = idGenerator();
+      spend.date = Date.now();
+      setSpends([...spends, spend]);
+    }
 
     setAnimateModal(false);
     setTimeout(() => {
@@ -41,13 +60,13 @@ function App() {
       {validBudget && (
         <>
           <main>
-            <SpendList spends={spends} />
+            <SpendList spends={spends} setEditSpend={setEditSpend} />
           </main>
           <div className='new-spend'>
             <img
               src={newspendIcon}
               alt='newspendIcon'
-              onClick={handleNewspend}
+              onClick={handleNewSpend}
             />
           </div>
         </>
@@ -59,6 +78,7 @@ function App() {
           animateModal={animateModal}
           setAnimateModal={setAnimateModal}
           saveSpend={saveSpend}
+          editSpend={editSpend}
         />
       )}
     </div>

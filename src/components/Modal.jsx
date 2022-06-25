@@ -1,11 +1,29 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Message from './Message';
 import close from '../img/close.svg';
-const Modal = ({ setModal, animateModal, setAnimateModal, saveSpend }) => {
+const Modal = ({
+  setModal,
+  animateModal,
+  setAnimateModal,
+  saveSpend,
+  editSpend,
+}) => {
   const [modalMessage, setModalMessage] = useState('');
   const [name, setName] = useState('');
   const [amount, setAmount] = useState('');
   const [category, setCategory] = useState('');
+  const [date, setDate] = useState('');
+  const [id, setId] = useState('');
+  useEffect(() => {
+    if (Object.keys(editSpend).length > 0) {
+      setName(editSpend.name);
+      setAmount(editSpend.amount);
+      setCategory(editSpend.category);
+      setDate(editSpend.date);
+      setId(editSpend.id);
+    }
+  }, []);
+
   const handleCloseModal = () => {
     setAnimateModal(false);
     setTimeout(() => {
@@ -21,7 +39,7 @@ const Modal = ({ setModal, animateModal, setAnimateModal, saveSpend }) => {
     } else {
       setModalMessage('');
     }
-    saveSpend({ name, amount, category });
+    saveSpend({ name, amount, category, date, id });
   };
   return (
     <div className='modal'>
@@ -32,7 +50,7 @@ const Modal = ({ setModal, animateModal, setAnimateModal, saveSpend }) => {
         onSubmit={handleSubmit}
         className={`form ${animateModal ? 'animate' : 'close'}`}
       >
-        <legend>New Spend</legend>
+        <legend>{editSpend.name ? 'Edit Spend' : 'New Spend'}</legend>
         {modalMessage && <Message type='error'>{modalMessage}</Message>}
 
         <div className='field'>
@@ -73,7 +91,7 @@ const Modal = ({ setModal, animateModal, setAnimateModal, saveSpend }) => {
             <option value='various'>Various</option>
           </select>
         </div>
-        <input type='submit' value='Add Spend' />
+        <input type='submit' value={editSpend.name ? 'Save' : 'Add Spend'} />
       </form>
     </div>
   );
