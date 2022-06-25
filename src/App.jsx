@@ -36,6 +36,7 @@ function App() {
         spendState.id === spend.id ? spend : spendState
       );
       setSpends(updatedSpend);
+      setEditSpend({});
     } else {
       spend.id = idGenerator();
       spend.date = Date.now();
@@ -46,6 +47,11 @@ function App() {
     setTimeout(() => {
       setModal(false);
     }, 500);
+  };
+
+  const deleteSpend = (id) => {
+    const updatedAllSpend = spends.filter((spend) => spend.id !== id);
+    setSpends(updatedAllSpend);
   };
 
   return (
@@ -60,7 +66,11 @@ function App() {
       {validBudget && (
         <>
           <main>
-            <SpendList spends={spends} setEditSpend={setEditSpend} />
+            <SpendList
+              spends={spends}
+              setEditSpend={setEditSpend}
+              deleteSpend={deleteSpend}
+            />
           </main>
           <div className='new-spend'>
             <img
@@ -79,6 +89,7 @@ function App() {
           setAnimateModal={setAnimateModal}
           saveSpend={saveSpend}
           editSpend={editSpend}
+          setEditSpend={setEditSpend}
         />
       )}
     </div>

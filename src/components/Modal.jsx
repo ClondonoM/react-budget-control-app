@@ -7,6 +7,7 @@ const Modal = ({
   setAnimateModal,
   saveSpend,
   editSpend,
+  setEditSpend,
 }) => {
   const [modalMessage, setModalMessage] = useState('');
   const [name, setName] = useState('');
@@ -26,6 +27,7 @@ const Modal = ({
 
   const handleCloseModal = () => {
     setAnimateModal(false);
+    setEditSpend({});
     setTimeout(() => {
       setAnimateModal(true);
       setModal(false);

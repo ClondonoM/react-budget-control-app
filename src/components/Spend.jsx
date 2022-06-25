@@ -24,8 +24,8 @@ const iconsDirectory = {
   subscriptions: subscriptionIcon,
   various: spendIcon,
 };
-const Spend = ({ spend, setEditSpend }) => {
-  const { name, amount, category, date } = spend;
+const Spend = ({ spend, setEditSpend, deleteSpend }) => {
+  const { name, amount, category, date, id } = spend;
   const leadingActions = () => (
     <LeadingActions>
       <SwipeAction onClick={() => setEditSpend(spend)}>Edit</SwipeAction>
@@ -34,7 +34,9 @@ const Spend = ({ spend, setEditSpend }) => {
 
   const trailingActions = () => (
     <TrailingActions>
-      <SwipeAction onClick={() => console.log('Delete...')}>Delete</SwipeAction>
+      <SwipeAction onClick={() => deleteSpend(id)} destructive={true}>
+        Delete
+      </SwipeAction>
     </TrailingActions>
   );
 
