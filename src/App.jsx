@@ -7,7 +7,9 @@ import newspendIcon from './img/new-spend.svg';
 
 function App() {
   const [spends, setSpends] = useState([]);
-  const [budget, setBudget] = useState('');
+  const [budget, setBudget] = useState(
+    Number(localStorage.getItem('budget')) ?? 0
+  );
   const [validBudget, setValidBudget] = useState(false);
   const [modal, setModal] = useState(false);
   const [animateModal, setAnimateModal] = useState(false);
@@ -21,6 +23,17 @@ function App() {
       }, 500);
     }
   }, [editSpend]);
+
+  useEffect(() => {
+    localStorage.setItem('budget', budget ?? 0);
+  }, [budget]);
+
+  useEffect(() => {
+    const lsBudget = Number(localStorage.getItem('budget')) ?? 0;
+    if (lsBudget > 0) {
+      setValidBudget(true);
+    }
+  }, []);
 
   const handleNewSpend = () => {
     setModal(true);
