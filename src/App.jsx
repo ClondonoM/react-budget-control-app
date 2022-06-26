@@ -6,7 +6,11 @@ import { idGenerator } from './helpers';
 import newspendIcon from './img/new-spend.svg';
 
 function App() {
-  const [spends, setSpends] = useState([]);
+  const [spends, setSpends] = useState(
+    localStorage.getItem('spends')
+      ? JSON.parse(localStorage.getItem('spends'))
+      : []
+  );
   const [budget, setBudget] = useState(
     Number(localStorage.getItem('budget')) ?? 0
   );
@@ -27,6 +31,10 @@ function App() {
   useEffect(() => {
     localStorage.setItem('budget', budget ?? 0);
   }, [budget]);
+
+  useEffect(() => {
+    localStorage.setItem('spends', JSON.stringify(spends) ?? []);
+  }, [spends]);
 
   useEffect(() => {
     const lsBudget = Number(localStorage.getItem('budget')) ?? 0;
