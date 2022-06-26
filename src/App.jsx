@@ -91,6 +91,7 @@ function App() {
     <div className={modal ? 'pinUp' : ''}>
       <Header
         spends={spends}
+        setSpends={setSpends}
         budget={budget}
         setBudget={setBudget}
         validBudget={validBudget}
