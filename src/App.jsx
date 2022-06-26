@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Header from './components/Header';
+import Filters from './components/Filters';
 import SpendList from './components/SpendList';
 import Modal from './components/Modal';
 import { idGenerator } from './helpers';
@@ -18,6 +19,9 @@ function App() {
   const [modal, setModal] = useState(false);
   const [animateModal, setAnimateModal] = useState(false);
   const [editSpend, setEditSpend] = useState({});
+
+  const [filter, setFilter] = useState('');
+
   useEffect(() => {
     if (Object.keys(editSpend).length > 0) {
       setModal(true);
@@ -35,6 +39,13 @@ function App() {
   useEffect(() => {
     localStorage.setItem('spends', JSON.stringify(spends) ?? []);
   }, [spends]);
+
+  useEffect(() => {
+    if (filter) {
+      const filterSpends = spends.filter((spend) => spend.category === filter);
+      console.log(filterSpends);
+    }
+  }, [filter]);
 
   useEffect(() => {
     const lsBudget = Number(localStorage.getItem('budget')) ?? 0;
@@ -87,6 +98,7 @@ function App() {
       {validBudget && (
         <>
           <main>
+            <Filters filter={filter} setFilter={setFilter} />
             <SpendList
               spends={spends}
               setEditSpend={setEditSpend}

@@ -261,7 +261,7 @@ main {
 .filter label {
   font-size: 3rem;
   font-weight: 900;
-  color: var(--lightGrey);
+  color: var(--darkGrey);
 }
 .filter select {
   flex: 1;
@@ -269,7 +269,7 @@ main {
   border: none;
   border-radius: 1rem;
   text-align: center;
-  background-color: var(--darkGrey);
+  background-color: var(--lightGrey);
 }
 
 .spends-list {
