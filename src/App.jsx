@@ -21,6 +21,7 @@ function App() {
   const [editSpend, setEditSpend] = useState({});
 
   const [filter, setFilter] = useState('');
+  const [filterSpends, setFilterSpends] = useState([]);
 
   useEffect(() => {
     if (Object.keys(editSpend).length > 0) {
@@ -43,7 +44,7 @@ function App() {
   useEffect(() => {
     if (filter) {
       const filterSpends = spends.filter((spend) => spend.category === filter);
-      console.log(filterSpends);
+      setFilterSpends(filterSpends);
     }
   }, [filter]);
 
@@ -103,6 +104,8 @@ function App() {
               spends={spends}
               setEditSpend={setEditSpend}
               deleteSpend={deleteSpend}
+              filter={filter}
+              filterSpends={filterSpends}
             />
           </main>
           <div className='new-spend'>
