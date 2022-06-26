@@ -28,10 +28,9 @@ const BudgetControl = ({ spends, budget }) => {
       <div>
         <CircularProgressbar
           styles={buildStyles({
-            pathColor: '#1a788a',
+            pathColor: percentage > 100 ? '#DC2626' : '#1a788a',
             trailColor: '#f5f5f5',
-            textColor: '#1a788a',
-            textWeight: 'bold',
+            textColor: percentage > 100 ? '#DC2626' : '#1a788a',
           })}
           value={percentage}
           text={`${percentage}% Spent`}
@@ -41,7 +40,7 @@ const BudgetControl = ({ spends, budget }) => {
         <p>
           <span>Budget: </span> {moneyFormat(budget)}
         </p>
-        <p>
+        <p className={`${available < 0 ? 'neg' : ''}`}>
           <span>Balance: </span> {moneyFormat(available)}
         </p>
         <p>
