@@ -2,7 +2,7 @@
 
 ## react-css-budget-control-app
 
-Budget Control App allows you to record your spends and control your budget. It was created with react and css
+Budget Control App allows you to record your spends and control your budget. Data is stored locally .It was created with react and css
 
 ## Getting Started with Vite React App
 
