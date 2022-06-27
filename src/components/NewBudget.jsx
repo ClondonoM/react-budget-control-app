@@ -16,10 +16,9 @@ const NewBudget = ({ budget, setBudget, setValidBudget }) => {
   return (
     <div onSubmit={haldleBudget} className='budget-container container shade'>
       <form className='form'>
-        <div className='field'>
-          <label htmlFor=''>Define the Budget</label>
+        <div className='field-budget'>
+          <label>Define the Budget</label>
           <input
-            className='new-budget'
             type='number'
             placeholder='Add your Budget'
             value={budget}
